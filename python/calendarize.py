@@ -47,6 +47,14 @@ def splittask(args):
 
     for d in args.skip.split(' '):
         skipdates.append(datetime.datetime.strptime(d, '%Y%m%d').date())
+
+    recurrentskip = eval(args.recurrentskip)
+    for d in recurrentskip:
+        d1 = datetime.datetime.strptime(d[0], '%Y%m%d').date()
+        while d1 < enddate:
+            skipdates.append(d1)
+            print(d1)
+            d1 = d1 + datetime.timedelta(days=d[1])
         
     if args.peopleperiod:
         period = datetime.timedelta(days=len(listpeople))
@@ -91,6 +99,7 @@ def options():
     parser.add_argument('-e', '--enddate', help='End date in format YearMonthDay', default='20191231')
     parser.add_argument('-p', '--period', help='Period for repeating task', default='7')
     parser.add_argument('-n', '--taskname', help='Name of task', default='My task')
+    parser.add_argument('-r', '--recurrentskip', help='Dates to skip with recurrence in days, list of tuple format "[("YearMonthDay",14)]""', default='20191208 20191225')
     parser.add_argument('-k', '--skip', help='Dates to skip, string in format "YearMonthDay YearMonthDay"', default='20191208 20191225')
     args = parser.parse_args()
     if args.verbose:
