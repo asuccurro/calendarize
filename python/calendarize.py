@@ -66,6 +66,7 @@ def splittask(args):
         ofiles[p].write(BEGIN0)
         
     #tottasks = timerange.days - len(skipdates)
+    genfile = open(args.outfilename.replace('NAME', 'all').replace('ics', 'csv'), 'w')
 
     t = 0
     while t < timerange.days:
@@ -74,7 +75,9 @@ def splittask(args):
             t = t + 1 + dt
             strdate = pdate.strftime("%Y%m%d")
             ofiles[p].write(f'BEGIN:VEVENT\nDTSTART;VALUE=DATE:{strdate}\nDTEND;VALUE=DATE:{strdate}\nDTSTAMP:{today}T120000\nUID:\nCREATED:{today}T120000\nDESCRIPTION:\nLOCATION:\nSEQUENCE:0\nSTATUS:CONFIRMED\nSUMMARY:{args.taskname}\nTRANSP:TRANSPARENT\nEND:VEVENT\n')
+            genfile.write(f'{strdate},{p}\n')
 
+    genfile.close()
     for p in ofiles.values():
         p.write(END0)
         p.close()
