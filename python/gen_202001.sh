@@ -1,0 +1,1 @@
+python3 calendarize.py -P -o '../output/fb_posting_NAME.ics' -n 'Post FB +E 4.0' -l 'MarioLavanga AntonellaSuccurro FabioEsposito StefanoTommei GiuliaPastorella LucaGeronimi' -s 20200109 -e 20200503 -k '20200126 20200223 20200329 20200426' -r '[("20200110", 14), ("20200111",14)]'
